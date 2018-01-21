@@ -1,7 +1,7 @@
 # Pony Challenge
 
 ## Description
-The following code fetches data from the Pony Challenge Api in order to help its ponies to reach their destiny Ponyville.
+The following code fetches data from the Pony Challenge Api in order to help its ponies to reach their destiny: Ponyville.
 
 ### Technical aspects
 - I run a DFS from the Pony's position to its goal, in order to find its shortest path to reach home.
@@ -11,6 +11,7 @@ The following code fetches data from the Pony Challenge Api in order to help its
 ### Improvements
 - Perform a DFS from the Pony to the Domokun and use a "retreat" and/or "stay away" strategy.
 - Implement an A* algorithm, using an arbitrary function to increase the cost of the nodes near the Domokun.
+- Add a wandering mode, with a way of "escaping" (finding circuits).
 - Display the hidden image once the game is over (I pushed a branch that does that, only compatible with iterm).
 
 ## Getting started
