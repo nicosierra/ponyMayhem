@@ -29,7 +29,6 @@ node src/index.js
 ```
 
 ### Running it via Docker
-First, build the image (execute only once)
 ```bash
 docker-compose build  # execute only once
 docker-compose run pony
