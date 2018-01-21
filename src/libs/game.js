@@ -20,7 +20,8 @@ class Game {
     this.renderGame(this.output);
   }
 
-  play() {
+  async play() {
+    await this.renderGame(this.output);
     if (!this._isActive()) {
       return;
     }
@@ -29,7 +30,8 @@ class Game {
       .then(this.play.bind(this));
   }
 
-  renderGame() {
+  async renderGame() {
+    this.output = await this.maze.printMaze();
     Ansi.render(this.output);
     Ansi.renderInfo(`Game ${this.state}, ${this.messages.pop()}`);
     Ansi.renderInfo(
@@ -42,9 +44,6 @@ class Game {
   async makeMove() {
     const result = await this.maze.makeNextMove();
     this._processResult(result);
-
-    this.output = await this.maze.printMaze();
-    this.renderGame(this.output);
   }
 
   _processResult(result) {
