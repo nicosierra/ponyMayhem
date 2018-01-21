@@ -94,7 +94,7 @@ class Maze {
    * @param {Array.<number[]>} solution
    */
   _traverseBFS(nodes, currentIndex, goalIndex, domokunIndex, path, solution) {
-    const KAMIKAZE = true; // if we set it as false, it will try to find secondary solutions
+    const KAMIKAZE = true; // if we set it as false, it will try to exclude paths where the dokomun is
     const currentNode = nodes[currentIndex];
     if (currentNode.visited) return;
     currentNode.visited = true;
