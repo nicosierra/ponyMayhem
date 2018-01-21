@@ -5,7 +5,7 @@ module.exports = setDelay;
  * @returns Promise<Void>
  */
 function setDelay(delay) {
-  return new Promise((resolve, reject) => {
+  return new Promise(resolve => {
     setTimeout(() => resolve(), delay);
   });
 }

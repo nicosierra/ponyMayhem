@@ -1,4 +1,4 @@
-const HttpClient = require('./../clients/http.client');
+const HttpClient = require('./../utils/http.client');
 const config = require('config');
 
 class PonyApiService {

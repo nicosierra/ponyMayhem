@@ -15,6 +15,14 @@ class Maze {
     return this.state['game-state'];
   }
 
+  getSize() {
+    return this.state.size;
+  }
+
+  getDifficulty() {
+    return this.state.difficulty;
+  }
+
   printMaze() {
     return PonyApi.printMaze(this.mazeId);
   }
@@ -32,7 +40,7 @@ class Maze {
    */
   _calculateNextMove() {
     const ponyIndex = this.state.pony[0];
-    const goalIndex = this.state['end-point'][0]
+    const goalIndex = this.state['end-point'][0];
     const domokunIndex = this.state.domokun[0];
     const nodes = this._buildAdjacencyListNodes();
 
@@ -42,10 +50,9 @@ class Maze {
     let nextStep;
     if (!pathToGoal) {
       const indices = nodes[ponyIndex].children.length;
-      const index = Math.floor(Math.random() * indices)
+      const index = Math.floor(Math.random() * indices);
       nextStep = nodes[ponyIndex].children[index];
-    }
-    else {
+    } else {
       nextStep = pathToGoal[1];
     }
 
@@ -78,11 +85,11 @@ class Maze {
   /**
    * Trasverse the tree using DFS and finding the shortest path
    * @returns number[]
-   * @param {Node[]} nodes 
-   * @param {number} currentIndex 
-   * @param {number} goalIndex 
-   * @param {number} ghostIndex 
-   * @param {number[]} path 
+   * @param {Node[]} nodes
+   * @param {number} currentIndex
+   * @param {number} goalIndex
+   * @param {number} ghostIndex
+   * @param {number[]} path
    * @param {Array.<number[]>} solution
    */
   _traverseDfs(nodes, currentIndex, goalIndex, ghostIndex, path, solution) {
@@ -94,11 +101,12 @@ class Maze {
       path.push(currentIndex);
       solution.push([...path]);
       return solution;
-    };
+    }
     path.push(currentIndex);
     for (let i = 0; !solution.length && i < currentNode.children.length; i++) {
       const childIndex = currentNode.children[i];
-      if (true || !(childIndex === ghostIndex)) { // TODO: Improve ghost avoidance strategy
+      if (true || !(childIndex === ghostIndex)) {
+        // TODO: Improve ghost avoidance strategy
         this._traverseDfs(nodes, childIndex, goalIndex, ghostIndex, path, solution);
       }
     }
@@ -117,7 +125,7 @@ class Maze {
     const maze = [];
     for (let h = 0; h < height; h++) {
       for (let w = 0; w < width; w++) {
-        const index = (h * width) + w;
+        const index = h * width + w;
         maze[index] = [];
         const blocks = data[index]; // blocked directions
         if (h + 1 < height && data[index + width].includes('north')) blocks.push('south');
@@ -128,10 +136,18 @@ class Maze {
         ['north', 'east', 'south', 'west'].forEach(direction => {
           if (!blocks.includes(direction)) {
             switch (direction) {
-              case 'north': maze[index].push(index - width); break;
-              case 'south': maze[index].push(index + width); break;
-              case 'west': maze[index].push(index - 1); break;
-              case 'east': maze[index].push(index + 1); break;
+              case 'north':
+                maze[index].push(index - width);
+                break;
+              case 'south':
+                maze[index].push(index + width);
+                break;
+              case 'west':
+                maze[index].push(index - 1);
+                break;
+              case 'east':
+                maze[index].push(index + 1);
+                break;
             }
           }
         });
@@ -141,7 +157,7 @@ class Maze {
       children: children,
       path: [],
       visited: false,
-    }));;
+    }));
   }
 }
 

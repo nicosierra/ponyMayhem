@@ -1,6 +1,6 @@
-const Game = require('./services/game');
 const commandLineArgs = require('command-line-args');
 const commandLineUsage = require('command-line-usage');
+const Ansi = require('./utils/ansi');
 
 const optionDefinitions = [
   {
@@ -48,24 +48,24 @@ function parse() {
   try {
     options = commandLineArgs(optionDefinitions);
   } catch (e) {
-    console.log(`ERROR: ${e.message}`);
+    Ansi.renderInfo(`ERROR: ${e.message}`);
     error = true;
   }
 
   if (error || options.help) {
     const usage = commandLineUsage([
       {
-        header: 'Save the Pony!',
         content:
           'Program that helps Ponies to find their shortest path to Ponyville, ' +
           'by using the Pony Challenge Api from Trustpilot.',
+        header: 'Save the Pony!',
       },
       {
         header: 'Options',
         optionList: optionDefinitions,
       },
     ]);
-    console.log(usage);
+    Ansi.renderInfo(usage + '\n');
     return false;
   } else {
     return options;

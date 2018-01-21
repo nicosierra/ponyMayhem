@@ -2,7 +2,7 @@ const Maze = require('./maze');
 const Ansi = require('./../utils/ansi');
 const setDelay = require('./../utils/setDelay');
 
-const GAME_STATES = { ACTIVE: 'active', WON: 'won', OVER: 'over' };
+const GAME_STATES = { ACTIVE: 'active', OVER: 'over', WON: 'won' };
 
 class Game {
   constructor(options) {
@@ -10,7 +10,6 @@ class Game {
     this.output = null;
     this.state = null;
     this.messages = [];
-    this.ansi = new Ansi()
   }
 
   async initialize() {
@@ -21,15 +20,22 @@ class Game {
   }
 
   play() {
-    if (!this.isActive) {
+    if (!this._isActive()) {
       return;
     }
-    return this.makeMove().then(setDelay.bind(10)).then(this.play.bind(this));
+    return this.makeMove()
+      .then(setDelay.bind(10))
+      .then(this.play.bind(this));
   }
 
   renderGame() {
-    this.ansi.render(this.output);
-    this.ansi.renderInfo(this.state, this.messages.pop());
+    Ansi.render(this.output);
+    Ansi.renderInfo(`Game ${this.state}, ${this.messages.pop()}`);
+    Ansi.renderInfo(
+      `MazeSize ${this.maze
+        .getSize()
+        .join(' x ')}, Difficulty: ${this.maze.getDifficulty()}, Exit: CTRL + C,`,
+    );
   }
 
   async makeMove() {
@@ -45,7 +51,7 @@ class Game {
     this.messages.push(result['state-result']);
   }
 
-  isActive() {
+  _isActive() {
     return this.state === GAME_STATES.ACTIVE;
   }
 }

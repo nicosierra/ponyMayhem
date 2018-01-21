@@ -1,3 +1,4 @@
+/* eslint-disable */
 module.exports = {
   getMazeState: {
     pony: [121],

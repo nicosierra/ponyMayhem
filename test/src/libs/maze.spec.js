@@ -29,7 +29,7 @@ describe('Maze', () => {
     createMazeStub.restore();
     getMazeStub.restore();
     movePonyStub.restore();
-  })
+  });
 
   describe('MakeNextMove', () => {
     it('shoud calculate next move', async () => {
@@ -99,7 +99,7 @@ describe('Maze', () => {
         [13, 17],
         [14],
       ];
-      result.forEach(({ }, i) => {
+      result.forEach(({}, i) => {
         expect(result[i]).to.have.all.keys('visited', 'children', 'path');
         expect(result[i].visited).to.be.false;
         expect(result[i].path).to.deep.equal([]);

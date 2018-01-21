@@ -6,21 +6,21 @@ class HttpClient {
   }
 
   get(url, options) {
-    options = { ...options, url }
+    options = { ...options, url };
     return this._request('GET', options);
   }
 
   post(url, data, options) {
-    options = { ...options, url, body: data }
+    options = { ...options, body: data, url };
     return this._request('POST', options);
-  };
+  }
 
   _request(method, options) {
     const _options = { ...this._clientOptions, ...options, json: true, method };
     return new Promise((resolve, reject) => {
       request(_options, (error, response, body) => {
         if (response.statusCode >= 400) {
-          error = new Error(`Status Code: ${response.statusCode}`);
+          error = new Error(body);
         }
         if (error) {
           reject(error);
