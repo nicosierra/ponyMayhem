@@ -12,7 +12,7 @@ The following code fetches data from the Pony Challenge Api in order to help its
 - Perform a BFS from the Pony to the Domokun and use a "retreat" and/or "stay away" strategy.
 - Implement an A* algorithm, using an arbitrary function to increase the cost of the nodes near the Domokun.
 - Add a wandering mode, with a way of "escaping" (finding circuits).
-- Display the hidden image once the game is over (I pushed a branch that does that, only compatible with iterm).
+- Display the hidden image once the game is over.
 - Use more efficient data structures.
 
 ## Getting started
