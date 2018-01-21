@@ -49,9 +49,7 @@ class Maze {
     // find Next Step
     let nextStep;
     if (!pathToGoal) {
-      const indices = nodes[ponyIndex].children.length;
-      const index = Math.floor(Math.random() * indices);
-      nextStep = nodes[ponyIndex].children[index];
+      nextStep = ponyIndex; // no path! I am freezed!
     } else {
       nextStep = pathToGoal[1];
     }
@@ -67,6 +65,9 @@ class Maze {
    */
   _moveToText(currentIndex, nextIndex) {
     const [width] = this.state.size;
+    if (currentIndex === nextIndex) {
+      return 'stay';
+    }
     if (currentIndex - nextIndex === 1) {
       return 'west';
     }
@@ -84,15 +85,16 @@ class Maze {
 
   /**
    * Trasverse the tree using DFS and finding the shortest path
-   * @returns number[]
+   * @returns number[] the path to the goal
    * @param {Node[]} nodes
    * @param {number} currentIndex
    * @param {number} goalIndex
-   * @param {number} ghostIndex
+   * @param {number} domokunIndex
    * @param {number[]} path
    * @param {Array.<number[]>} solution
    */
-  _traverseDfs(nodes, currentIndex, goalIndex, ghostIndex, path, solution) {
+  _traverseDfs(nodes, currentIndex, goalIndex, domokunIndex, path, solution) {
+    const KAMIKAZE = true; // if we set it as false, it will try to find secondary solutions
     const currentNode = nodes[currentIndex];
     if (currentNode.visited) return;
     currentNode.visited = true;
@@ -105,9 +107,9 @@ class Maze {
     path.push(currentIndex);
     for (let i = 0; !solution.length && i < currentNode.children.length; i++) {
       const childIndex = currentNode.children[i];
-      if (true || !(childIndex === ghostIndex)) {
-        // TODO: Improve ghost avoidance strategy
-        this._traverseDfs(nodes, childIndex, goalIndex, ghostIndex, path, solution);
+      // TODO: Improve Domokun avoidance strategy
+      if (KAMIKAZE || !(childIndex === domokunIndex)) {
+        this._traverseDfs(nodes, childIndex, goalIndex, domokunIndex, path, solution);
       }
     }
     path.pop();

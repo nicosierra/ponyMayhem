@@ -17,20 +17,20 @@ class Game {
     const result = await this.maze.initialize();
     this._processResult(result);
     this.output = await this.maze.printMaze();
-    this.renderGame(this.output);
+    this._renderGame(this.output);
   }
 
   async play() {
-    await this.renderGame(this.output);
+    await this._renderGame(this.output);
     if (!this._isActive()) {
       return;
     }
-    return this.makeMove()
+    return this._makeMove()
       .then(setDelay.bind(config.get('delay')))
       .then(this.play.bind(this));
   }
 
-  async renderGame() {
+  async _renderGame() {
     this.output = await this.maze.printMaze();
     Ansi.render(this.output);
     Ansi.renderInfo(`Game ${this.state}, ${this.messages.pop()}`);
@@ -41,7 +41,7 @@ class Game {
     );
   }
 
-  async makeMove() {
+  async _makeMove() {
     const result = await this.maze.makeNextMove();
     this._processResult(result);
   }
