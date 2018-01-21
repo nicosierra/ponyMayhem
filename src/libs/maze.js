@@ -44,7 +44,7 @@ class Maze {
     const domokunIndex = this.state.domokun[0];
     const nodes = this._buildAdjacencyListNodes();
 
-    const pathToGoal = this._traverseDfs(nodes, ponyIndex, goalIndex, domokunIndex, [], []);
+    const pathToGoal = this._traverseBFS(nodes, ponyIndex, goalIndex, domokunIndex, [], []);
 
     // find Next Step
     let nextStep;
@@ -84,7 +84,7 @@ class Maze {
   }
 
   /**
-   * Trasverse the tree using DFS and finding the shortest path
+   * Trasverse the tree using BFS and finding the shortest path
    * @returns number[] the path to the goal
    * @param {Node[]} nodes
    * @param {number} currentIndex
@@ -93,7 +93,7 @@ class Maze {
    * @param {number[]} path
    * @param {Array.<number[]>} solution
    */
-  _traverseDfs(nodes, currentIndex, goalIndex, domokunIndex, path, solution) {
+  _traverseBFS(nodes, currentIndex, goalIndex, domokunIndex, path, solution) {
     const KAMIKAZE = true; // if we set it as false, it will try to find secondary solutions
     const currentNode = nodes[currentIndex];
     if (currentNode.visited) return;
@@ -109,7 +109,7 @@ class Maze {
       const childIndex = currentNode.children[i];
       // TODO: Improve Domokun avoidance strategy
       if (KAMIKAZE || !(childIndex === domokunIndex)) {
-        this._traverseDfs(nodes, childIndex, goalIndex, domokunIndex, path, solution);
+        this._traverseBFS(nodes, childIndex, goalIndex, domokunIndex, path, solution);
       }
     }
     path.pop();

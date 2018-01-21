@@ -107,9 +107,9 @@ describe('Maze', () => {
       });
     });
 
-    it('should traverse using dfs and return the shortest path', () => {
+    it('should traverse using BFS and return the shortest path', () => {
       const nodes = maze._buildAdjacencyListNodes();
-      const result = maze._traverseDfs(nodes, 0, 19, 2, [], []);
+      const result = maze._traverseBFS(nodes, 0, 19, 2, [], []);
       expect(result).to.include.all.members([0, 5, 10, 15, 16, 11, 12, 7, 8, 9, 14, 19]);
     });
 
