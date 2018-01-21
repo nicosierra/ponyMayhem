@@ -1,7 +1,7 @@
 const common = require('./../../common');
 const Maze = require('./../../../src/libs/maze');
 const PonyApi = require('./../../../src/libs/ponyApi.service');
-const examples = require('./examples.js');
+const examples = require('./../examples.js');
 const { expect } = common.chai;
 const sinon = common.sinon;
 
