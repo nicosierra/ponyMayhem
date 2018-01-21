@@ -1,5 +1,6 @@
 const Maze = require('./maze');
 const Ansi = require('./../utils/ansi');
+const config = require('config');
 const setDelay = require('./../utils/setDelay');
 
 const GAME_STATES = { ACTIVE: 'active', OVER: 'over', WON: 'won' };
@@ -24,7 +25,7 @@ class Game {
       return;
     }
     return this.makeMove()
-      .then(setDelay.bind(10))
+      .then(setDelay.bind(config.get('delay')))
       .then(this.play.bind(this));
   }
 
