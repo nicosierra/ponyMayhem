@@ -13,6 +13,7 @@ The following code fetches data from the Pony Challenge Api in order to help its
 - Implement an A* algorithm, using an arbitrary function to increase the cost of the nodes near the Domokun.
 - Add a wandering mode, with a way of "escaping" (finding circuits).
 - Display the hidden image once the game is over (I pushed a branch that does that, only compatible with iterm).
+- Use more efficient data structures.
 
 ## Getting started
 You can run the code directly, or via docker
@@ -22,17 +23,15 @@ You can run the code directly, or via docker
 - Node > 9
 
 ### Running it directly on your machine
-```
+```bash
+npm i                 # execute only once
 node src/index.js
 ```
 
 ### Running it via Docker
 First, build the image (execute only once)
-```
-docker-compose build
-```
-Run it with:
-```
+```bash
+docker-compose build  # execute only once
 docker-compose run pony
 ```
 
