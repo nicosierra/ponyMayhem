@@ -1,0 +1,5 @@
+version: '3'
+services:
+  pony:
+    image: com.trustpilot.ponychallenge/nicolas:latest
+    build: .

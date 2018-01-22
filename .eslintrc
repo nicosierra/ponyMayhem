@@ -1,0 +1,53 @@
+{
+  "extends": [
+    "prettier"
+  ],
+  "env": {
+    "es6": true
+  },
+  "parserOptions": {
+    "ecmaVersion": 8,
+    "ecmaFeatures": {
+      "experimentalObjectRestSpread": true
+    }
+  },
+  "plugins": [
+    "prettier"
+  ],
+  "rules": {
+    "prettier/prettier": [
+      "error",
+      {
+        "bracketSpacing": true,
+        "jsxBracketSameLine": false,
+        "parser": "flow",
+        "printWidth": 100,
+        "semi": true,
+        "singleQuote": true,
+        "tabWidth": 2,
+        "trailingComma": "all",
+        "useTabs": false
+      }
+    ],
+    "no-fallthrough": 0,
+    "no-duplicate-case": 0,
+    "generator-star-spacing": 0,
+    "no-trailing-spaces": [
+      "error",
+      {
+        "ignoreComments": false
+      }
+    ],
+    "sort-keys": "warn",
+    "require-jsdoc": "warn",
+    "no-console": "error",
+    "no-shadow": "warn",
+    "no-unused-vars": [
+      "warn",
+      {
+        "args": "all"
+      }
+    ],
+    "no-unused-expressions": "warn"
+  }
+}
